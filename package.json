@@ -1,0 +1,26 @@
+{
+  "name": "motorsentinel-backend",
+  "version": "1.0.0",
+  "description": "motorsentinel backend services",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jasperschulz/motorsentinel-backend.git"
+  },
+  "keywords": [
+    "motorsentinel",
+    "backend"
+  ],
+  "author": "Jasper Schulz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jasperschulz/motorsentinel-backend/issues"
+  },
+  "homepage": "https://github.com/jasperschulz/motorsentinel-backend#readme",
+  "dependencies": {
+    "express": "^4.15.2"
+  }
+}
