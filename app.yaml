@@ -1,2 +1,7 @@
+# runtime configuration
 runtime: nodejs
 env: flex
+
+# skip uploading node_modules
+skip_files:
+ - ^node_modules$
