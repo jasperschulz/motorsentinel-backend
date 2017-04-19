@@ -1,10 +1,11 @@
 var express = require('express');
+var appConfig = require('./config.json')
 var app = express();
 
 app.get('/', function(req, res) {
-    res.send('HI!')
+    res.send('This will be the backend')
 });
 
-app.listen(8080, function() {
-    console.log('listening on port 90')
+app.listen(appConfig.port, function() {
+    console.log(`listening on port ${appConfig.port}`)
 })
