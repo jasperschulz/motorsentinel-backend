@@ -1,11 +1,21 @@
+// Read app configuration
+global.config = require('./config.json');
+
 var express = require('express');
-var appConfig = require('./config.json')
 var app = express();
 
-app.get('/', function(req, res) {
+app.get('/', (req, res) => {
     res.send('This will be the backend')
 });
 
-app.listen(appConfig.port, function() {
-    console.log(`listening on port ${appConfig.port}`)
+app.route('/post')
+    .get((req,res) => {
+      res.send('Get Post')
+    })
+    .post((req,res) => {
+        res.send('New Post')
+    })
+
+app.listen(global.config.port, () => {
+    console.log(`listening on port ${global.config.port}`)
 })
