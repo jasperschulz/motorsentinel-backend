@@ -1,3 +1,5 @@
+'use strict';
+
 // Read app configuration
 global.config = require('./config.json');
 
