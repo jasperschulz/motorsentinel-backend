@@ -4,7 +4,7 @@
 global.config = require('./config.json');
 
 const express = require('express');
-var app = express();
+const app = express();
 
 // init routes
 require('./libs/api/routes.js')(app);
