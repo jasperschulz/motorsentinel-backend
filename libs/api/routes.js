@@ -12,14 +12,18 @@ module.exports = (app) => {
 
     app.get('/post/:id', (req, res) => {
         datastore.getPost(req.params.id, (entity) => {
-            res.send(entity)
+            if(!entity) {
+                // 404
+            } else {
+                res.send(entity)
+            }
         })
     })
 
     app.get('/', (req, res) => {
         datastore.listPosts((err, entities) => {
             res.send(entities)
-        })
+        }, req.query.offset, req.query.limit)
     })
 
 }

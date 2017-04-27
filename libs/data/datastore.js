@@ -1,3 +1,6 @@
+/**
+ * DataAccess
+ */
 const Datastore = require('@google-cloud/datastore');
 
 // Initialize Google Datastore
@@ -16,14 +19,19 @@ const postStructure = {
         title: 'Sample Post',
         text: 'This is my first post.',
         plain_text: '',
-        created: new Date()
+        created: new Date(),
+        modified: new Date(),
+        author: 'Jasper Schulz'
     }
 }
 
+/**
+ * Save post to database
+ * @param {*} newPost Post to save
+ */
 module.exports.savePost = (newPost) => {
-    let now = new Date()
-    newPost.data.created = now;
-    newPost.data.modified = now;
+    newPost.data.created = Date.now();
+    newPost.data.modified = Date.now();
     datastoreClient.save(newPost, (err) => {
         if(!err) {
             console.log(`Successfully saved new Post with id ${newPost.key.id}`)
@@ -31,14 +39,31 @@ module.exports.savePost = (newPost) => {
     })
 }
 
-module.exports.listPosts = (callback) => {
-    datastoreClient.createQuery(kind).order('created', {
+/**
+ * List posts ordered by creation time
+ * @callback {err, entities}
+ */
+module.exports.listPosts = (callback, offset='undefined', limit='undefined') => {
+    query = datastoreClient.createQuery(kind).order('created', {
         descending: true
-    }).run((err, entities, info) => {
+    });
+    if(offset){
+        query.offset(offset)
+    }
+    if(limit){
+        query.limit(limit)
+    }
+    
+    query.run((err, entities, info) => {
         callback(err, entities)
     })
 }
 
+/**
+ * Get post by id
+ * @param {number} id ID of the post
+ * @callback
+ */
 module.exports.getPost = (id, callback) => {
     let key = datastoreClient.key([kind, datastoreClient.int(id)])
     datastoreClient.get(key, (err, entity) => {

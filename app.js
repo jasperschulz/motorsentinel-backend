@@ -1,3 +1,6 @@
+/**
+ * Backend-Services of Motorsentinel
+ */
 'use strict';
 
 // Read app configuration
