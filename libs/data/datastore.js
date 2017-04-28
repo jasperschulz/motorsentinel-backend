@@ -44,14 +44,17 @@ module.exports.savePost = (newPost) => {
  * @callback {err, entities}
  */
 module.exports.listPosts = (callback, offset='undefined', limit='undefined') => {
-    query = datastoreClient.createQuery(kind).order('created', {
+    var query = datastoreClient.createQuery(kind)
+    
+    query.order('created', {
         descending: true
-    });
+    })
+
     if(offset){
-        query.offset(offset)
+        query.offset(Number(offset))
     }
     if(limit){
-        query.limit(limit)
+        query.limit(Number(limit))
     }
     
     query.run((err, entities, info) => {
